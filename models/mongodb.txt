@@ -1,0 +1,85 @@
+/* This will serve as notes for mongodb and mongoose  */
+
+
+Database server can have multiple databases 
+Each db have multiple collections
+.database server
+..database
+...collections
+....todos
+.....documents
+.....documents
+....posts
+....users
+...collections
+..database
+
+collections are tables and documents are rows or each item in the collection
+
+MONGO SHELL OPERATIONS
+
+QUERY THE DOCUMENT 
+------------------
+db.inventory.find( { item: "canvas" } )
+
+
+INSERT OPERATIONS
+-----------------
+
+db.inventory.insertOne(
+    { item: "canvas", qty: 100, tags: ["cotton"], size: { h: 28, w: 35.5, uom: "cm" } }
+)
+
+db.inventory.insertMany([
+   { item: "journal", qty: 25, tags: ["blank", "red"], size: { h: 14, w: 21, uom: "cm" } },
+   { item: "mat", qty: 85, tags: ["gray"], size: { h: 27.9, w: 35.5, uom: "cm" } },
+   { item: "mousepad", qty: 25, tags: ["gel", "blue"], size: { h: 19, w: 22.85, uom: "cm" } }
+])
+
+
+UPDATE OPERATION
+----------------
+
+db.inventory.updateOne(
+   { item: "paper" },
+   {
+     $set: { "size.uom": "cm", status: "P" },
+     $currentDate: { lastModified: true }
+   }
+)
+
+
+db.inventory.updateMany(
+   { "qty": { $lt: 50 } },
+   {
+     $set: { "size.uom": "in", status: "P" },
+     $currentDate: { lastModified: true }
+   }
+)
+
+db.collection.updateOne()
+db.collection.updateMany()
+db.collection.findOneAndUpdate().
+db.collection.replaceOne()
+db.collection.findOneAndReplace().
+db.collection.findAndModify().
+db.collection.bulkWrite().
+
+
+DELETE OPERATION
+-----------------
+db.inventory.deleteOne( { status: "D" } )
+db.inventory.deleteMany({ status : "A" })
+
+
+
+
+
+
+
+
+
+
+
+
+
